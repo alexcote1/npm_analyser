@@ -11,12 +11,12 @@ class npm_analyser(object):
             raise SystemExit('NPM Package not found!')
         self.version = self._version()
         self.last_published = self._last_published()
-        self.number_of_dependents = self._number_of_dependents()
         self.get_dev_dependencies = self._get_dev_dependencies()
         self.total_versions = self._total_versions()
         self.license = self._license()
         self.unpacked_size = self._unpacked_size()
         self.weekly_downloads = self._weekly_downloads()
+        self.repo=self._repo()
         self.total_files = self._total_files()
     
     def __setitem__(self, key, value):
@@ -61,7 +61,14 @@ class npm_analyser(object):
             content = sub_tag.get_text()
             if content.startswith('License'):
                 return sub_tag.findNext('p').get_text()
-            
+
+    def _repo(self):
+        soup = self._package_parcer()
+        for sub_tag in soup.find_all('h3'):
+            content = sub_tag.get_text()
+            if content.startswith('Repository'):
+                return sub_tag.findNext('p').get_text()
+
     def _unpacked_size(self):
         soup = self._package_parcer()
         for sub_tag in soup.find_all('h3'):
@@ -81,11 +88,7 @@ class npm_analyser(object):
         tag = soup.find_all('meta')[-1].get("content", None)
         return str(tag.split('last published: ')[1]).split('.')[0]   
     
-    def _number_of_dependents(self):
-        soup = self._package_parcer()
-        tag = soup.find_all('meta')[-1].get("content", None)
-        return str(tag.split('There are ')[1]).split(' ')[0]
-    
+
     def _get_dev_dependencies(self):
         soup = self._package_parcer()
         try:
