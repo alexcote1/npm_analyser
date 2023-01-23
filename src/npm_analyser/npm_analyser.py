@@ -10,7 +10,7 @@ class npm_analyser(object):
         if self._get_package_sanity() == False:
             raise SystemExit('NPM Package not found!')
         self.version = self._version()
-        self.last_published = self._last_published()
+#        self.last_published = self._last_published()
         self.get_dev_dependencies = self._get_dev_dependencies()
         self.total_versions = self._total_versions()
         self.license = self._license()
