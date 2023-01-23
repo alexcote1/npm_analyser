@@ -6,13 +6,13 @@ with open("README.md", "r", encoding="utf-8") as fh:
 setuptools.setup(
     name="npm_analyser",
     version="1.0.0",
-    author="Pukar Acharya",
+    author="alex cote",
     description="A Python library to monitor an npm package!",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/iampukar/npm_analyser",
+    url="https://github.com/alexcote1/npm_analyser",
     project_urls={
-        "Bug Tracker": "https://github.com/iampukar/npm_analyser/issues",
+        "Bug Tracker": "https://github.com/alexcote1/npm_analyser/issues",
     },
     classifiers=[
         "Programming Language :: Python :: 3",
